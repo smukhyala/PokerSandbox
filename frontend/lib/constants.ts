@@ -1,5 +1,43 @@
 export const AGENT_TYPES = ['TAG', 'LAG', 'CallingStation', 'Random', 'MLAgent', 'Custom'] as const
 
+export const AGENT_DESCRIPTIONS: Record<string, string> = {
+  TAG: 'Tight-Aggressive: plays fewer starting hands and applies pressure with strong ranges.',
+  LAG: 'Loose-Aggressive: plays wider ranges and bluffs more often.',
+  CallingStation: 'Calling Station: calls frequently, folds rarely, and seldom raises.',
+  Random: 'Random: chooses randomly from legal actions; useful as a noise baseline.',
+  MLAgent: 'Machine Learning Agent: uses the Random Forest EV model to choose the highest predicted-value action.',
+  Custom: 'Custom: uses the natural-language strategy compiled in Strategy Lab.',
+}
+
+export const AGENT_LABELS: Record<string, string> = {
+  TAG: 'TAG - Tight-Aggressive',
+  LAG: 'LAG - Loose-Aggressive',
+  CallingStation: 'Calling Station',
+  Random: 'Random Baseline',
+  MLAgent: 'Machine Learning Agent',
+  Custom: 'Custom Strategy',
+}
+
+export const POSITION_LABELS: Record<string, string> = {
+  BTN: 'Button',
+  BB: 'Big Blind',
+  SB: 'Small Blind',
+  CO: 'Cutoff',
+  MP: 'Middle Position',
+  UTG: 'Under the Gun',
+}
+
+export const POSITION_DESCRIPTIONS: Record<string, string> = {
+  BTN: 'Button: dealer seat; acts last after the flop.',
+  BB: 'Big Blind: posts the full blind; acts first after the flop.',
+  SB: 'Small Blind: posts half a blind.',
+  CO: 'Cutoff: seat immediately before the Button.',
+  MP: 'Middle Position: middle table seat.',
+  UTG: 'Under the Gun: first seat to act preflop.',
+}
+
+export const BB_EXPLANATION = 'BB means big blind, the standard poker unit used for stack, pot, and profit size.'
+
 export const SUIT_SYMBOLS: Record<string, string> = {
   h: '\u2665',
   d: '\u2666',

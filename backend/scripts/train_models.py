@@ -28,6 +28,13 @@ def load_data() -> pd.DataFrame:
     return pd.read_csv(path)
 
 
+def load_ev_data_or_none() -> pd.DataFrame | None:
+    path = os.path.join(DATA_DIR, "ev_training_data.csv")
+    if not os.path.exists(path):
+        return None
+    return pd.read_csv(path)
+
+
 def train_hand_strength(df: pd.DataFrame) -> None:
     """Train hand strength predictor (equity bucket classification)."""
     print("\n=== Training Hand Strength Model ===")
@@ -111,13 +118,19 @@ def train_ev_model(df: pd.DataFrame) -> None:
     """Train EV prediction model."""
     print("\n=== Training EV Model ===")
 
-    # Add action one-hot encoding
-    for action_type in ActionType:
-        col = f"action_{action_type.value}"
-        df[col] = (df["action_taken"] == action_type.value).astype(float)
+    ev_df = load_ev_data_or_none()
+    if ev_df is not None and len(ev_df) >= 100:
+        print(f"  Using counterfactual EV labels: {len(ev_df)} rows")
+        X = ev_df[FULL_FEATURE_NAMES].copy()
+        y = ev_df["action_ev_bb"]
+    else:
+        print("  Counterfactual EV data not found; falling back to final hand profit labels.")
+        for action_type in ActionType:
+            col = f"action_{action_type.value}"
+            df[col] = (df["action_taken"] == action_type.value).astype(float)
 
-    X = df[FULL_FEATURE_NAMES].copy()
-    y = df["hand_profit_bb"]
+        X = df[FULL_FEATURE_NAMES].copy()
+        y = df["hand_profit_bb"]
 
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42

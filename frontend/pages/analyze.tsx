@@ -2,7 +2,7 @@ import { useState } from 'react'
 import CardGroup from '@/components/cards/CardGroup'
 import CardSelector from '@/components/cards/CardSelector'
 import { analyzeHand } from '@/lib/api'
-import { ACTION_LABELS } from '@/lib/constants'
+import { ACTION_LABELS, BB_EXPLANATION, POSITION_DESCRIPTIONS, POSITION_LABELS } from '@/lib/constants'
 import type { AnalysisResult } from '@/types'
 import clsx from 'clsx'
 
@@ -42,7 +42,11 @@ export default function AnalyzePage() {
         hero_position: heroPosition,
       })
       setResult(res)
-    } catch (e) { console.error(e) }
+    } catch (e: unknown) {
+      const err = e as { response?: { data?: unknown }; message?: string }
+      console.error('Analyze error:', err.response?.data || err.message || e)
+      alert(`Analyze failed: ${JSON.stringify(err.response?.data || err.message || 'unknown error')}`)
+    }
     setLoading(false)
   }
 
@@ -57,7 +61,9 @@ export default function AnalyzePage() {
     <div className="max-w-5xl">
       <div className="mb-6">
         <h2 className="text-2xl font-bold">Analyze</h2>
-        <p className="text-gray-400 text-sm mt-1">Break down any poker hand</p>
+        <p className="text-gray-400 text-sm mt-1">
+          Break down any poker hand. {BB_EXPLANATION}
+        </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -94,7 +100,7 @@ export default function AnalyzePage() {
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-xs text-gray-500 block mb-1">Pot (BB)</label>
+                <label className="text-xs text-gray-500 block mb-1">Pot in big blinds</label>
                 <input type="number" value={potSize} onChange={e => setPotSize(Number(e.target.value))}
                   className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm" />
               </div>
@@ -102,21 +108,18 @@ export default function AnalyzePage() {
                 <label className="text-xs text-gray-500 block mb-1">Position</label>
                 <select value={heroPosition} onChange={e => setHeroPosition(e.target.value)}
                   className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm">
-                  <option value="BTN">Button (BTN) — Dealer, acts last post-flop</option>
-                  <option value="BB">Big Blind (BB) — Acts first post-flop</option>
-                  <option value="SB">Small Blind (SB) — Posts half blind</option>
-                  <option value="CO">Cutoff (CO) — One before button</option>
-                  <option value="MP">Middle Position (MP)</option>
-                  <option value="UTG">Under the Gun (UTG) — First to act</option>
+                  {Object.entries(POSITION_DESCRIPTIONS).map(([value, label]) => (
+                    <option key={value} value={value}>{label}</option>
+                  ))}
                 </select>
               </div>
               <div>
-                <label className="text-xs text-gray-500 block mb-1">Hero Stack (BB)</label>
+                <label className="text-xs text-gray-500 block mb-1">Hero stack in big blinds</label>
                 <input type="number" value={heroStack} onChange={e => setHeroStack(Number(e.target.value))}
                   className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm" />
               </div>
               <div>
-                <label className="text-xs text-gray-500 block mb-1">Villain Stack (BB)</label>
+                <label className="text-xs text-gray-500 block mb-1">Villain stack in big blinds</label>
                 <input type="number" value={villainStack} onChange={e => setVillainStack(Number(e.target.value))}
                   className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm" />
               </div>
@@ -156,6 +159,10 @@ export default function AnalyzePage() {
                 <p className="text-xs text-gray-500 mb-1">Recommended Action</p>
                 <p className="text-lg font-bold text-green-400">{ACTION_LABELS[result.recommended_action] || result.recommended_action}</p>
               </div>
+              <div className="bg-gray-800 rounded-lg p-4">
+                <p className="text-xs text-gray-500 mb-1">Position</p>
+                <p className="text-sm text-gray-300">{POSITION_LABELS[heroPosition]} ({POSITION_DESCRIPTIONS[heroPosition]})</p>
+              </div>
 
               <div>
                 <h4 className="text-xs text-gray-500 mb-2">Action EVs</h4>
@@ -171,7 +178,7 @@ export default function AnalyzePage() {
                           <span className={action === result.recommended_action ? 'text-green-400' : 'text-gray-400'}>
                             {ACTION_LABELS[action] || action}
                           </span>
-                          <span className="font-mono">{ev.toFixed(1)} BB</span>
+                          <span className="font-mono">{ev.toFixed(1)} big blinds</span>
                         </div>
                         <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
                           <div className={clsx('h-full rounded-full', action === result.recommended_action ? 'bg-green-500' : 'bg-gray-500')}

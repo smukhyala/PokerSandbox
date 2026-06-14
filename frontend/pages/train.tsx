@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import CardGroup from '@/components/cards/CardGroup'
 import { getTrainingScenario, gradeScenario } from '@/lib/api'
-import { ACTION_LABELS } from '@/lib/constants'
+import { ACTION_LABELS, BB_EXPLANATION, POSITION_LABELS } from '@/lib/constants'
 import type { TrainingScenario, GradeResult } from '@/types'
 import clsx from 'clsx'
 
@@ -45,7 +45,7 @@ export default function TrainPage() {
       <div className="mb-6">
         <h2 className="text-2xl font-bold">Train</h2>
         <p className="text-gray-400 text-sm mt-1">
-          Practice reading poker situations. You&apos;ll see a hand, estimate its strength, choose an action, and get ML-powered feedback.
+          Practice reading poker situations. You&apos;ll see a hand, estimate its strength, choose an action, and get ML-powered feedback. {BB_EXPLANATION}
         </p>
       </div>
 
@@ -88,9 +88,9 @@ export default function TrainPage() {
               {/* Info grid */}
               <div className="grid grid-cols-4 gap-3 mb-4">
                 <InfoBox label="Street" value={scenario.street} />
-                <InfoBox label="Pot" value={`${scenario.pot_size_bb} BB`} />
-                <InfoBox label="Your Stack" value={`${scenario.hero_stack_bb} BB`} />
-                <InfoBox label="Position" value={scenario.hero_position} />
+                <InfoBox label="Pot" value={`${scenario.pot_size_bb} big blinds`} />
+                <InfoBox label="Your Stack" value={`${scenario.hero_stack_bb} big blinds`} />
+                <InfoBox label="Position" value={POSITION_LABELS[scenario.hero_position] ?? scenario.hero_position} />
               </div>
 
               {/* Action history */}
@@ -100,7 +100,7 @@ export default function TrainPage() {
                   <div className="flex flex-wrap gap-1.5">
                     {scenario.action_history.map((a, i) => (
                       <span key={i} className="bg-gray-800 text-gray-300 text-xs px-2 py-1 rounded">
-                        {a.player} {a.action}{a.amount ? ` ${a.amount} BB` : ''}
+                        {POSITION_LABELS[a.player] ?? a.player} {a.action}{a.amount ? ` ${a.amount} big blinds` : ''}
                       </span>
                     ))}
                   </div>
@@ -220,13 +220,13 @@ export default function TrainPage() {
                   />
                   <MetricBox
                     label="Your Action EV"
-                    value={`${feedback.chosen_ev >= 0 ? '+' : ''}${feedback.chosen_ev.toFixed(1)} BB`}
+                    value={`${feedback.chosen_ev >= 0 ? '+' : ''}${feedback.chosen_ev.toFixed(1)} big blinds`}
                     note="Expected profit from your choice"
                   />
                   <MetricBox
                     label="Best Action EV"
-                    value={`${feedback.optimal_ev >= 0 ? '+' : ''}${feedback.optimal_ev.toFixed(1)} BB`}
-                    note={feedback.ev_loss > 0 ? `You left ${feedback.ev_loss.toFixed(1)} BB on the table` : 'No EV lost — perfect!'}
+                    value={`${feedback.optimal_ev >= 0 ? '+' : ''}${feedback.optimal_ev.toFixed(1)} big blinds`}
+                    note={feedback.ev_loss > 0 ? `You left ${feedback.ev_loss.toFixed(1)} big blinds on the table` : 'No EV lost — perfect!'}
                     bad={feedback.ev_loss > 2}
                     good={feedback.ev_loss === 0}
                   />
@@ -267,7 +267,7 @@ export default function TrainPage() {
                             {isChosen && isOptimal && ' (you — correct!)'}
                             {isChosen && !isOptimal && ' (your pick)'}
                           </span>
-                          <span className="font-mono text-gray-300">{ev >= 0 ? '+' : ''}{ev.toFixed(1)} BB</span>
+                          <span className="font-mono text-gray-300">{ev >= 0 ? '+' : ''}{ev.toFixed(1)} big blinds</span>
                         </div>
                       )
                     })}

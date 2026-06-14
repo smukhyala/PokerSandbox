@@ -3,7 +3,9 @@ import type {
   AnalysisResult,
   GradeResult,
   ParseResult,
+  StrategyDiagnoseResult,
   SimulationResult,
+  StrategyExperimentResult,
   TrainingScenario,
 } from '@/types'
 
@@ -57,5 +59,41 @@ export async function simulate(params: {
 
 export async function parseStrategy(description: string): Promise<ParseResult> {
   const { data } = await api.post('/parse-strategy', { description })
+  return data
+}
+
+export async function runStrategyExperiment(params: {
+  description: string
+  baseline_agent: string
+  num_hands: number
+  seed?: number
+}): Promise<StrategyExperimentResult> {
+  const { data } = await api.post('/strategy-experiment', {
+    description: params.description,
+    baseline_agent: params.baseline_agent,
+    num_hands: params.num_hands,
+    seed: params.seed ?? 42,
+  })
+  return data
+}
+
+export async function diagnoseStrategy(params: {
+  description?: string
+  strategy_config?: Record<string, unknown>
+  baselines?: string[]
+  num_hands: number
+  seed?: number
+  optimize?: boolean
+  max_candidates?: number
+}): Promise<StrategyDiagnoseResult> {
+  const { data } = await api.post('/strategy-diagnose', {
+    description: params.description ?? '',
+    strategy_config: params.strategy_config,
+    baselines: params.baselines ?? ['TAG', 'LAG', 'CallingStation', 'Random'],
+    num_hands: params.num_hands,
+    seed: params.seed ?? 42,
+    optimize: params.optimize ?? true,
+    max_candidates: params.max_candidates ?? 6,
+  })
   return data
 }

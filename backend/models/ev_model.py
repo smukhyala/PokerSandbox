@@ -65,16 +65,20 @@ class EVModel:
         if not self._is_trained:
             raise RuntimeError("Model not trained")
 
-        results = {}
+        rows = []
         for action in legal_actions:
             row = dict(features)
             for at in ActionType:
                 row[f"action_{at.value}"] = 1.0 if at == action else 0.0
-            X = pd.DataFrame([row])[FULL_FEATURE_NAMES]
-            ev = float(self.model.predict(X)[0])
-            results[action.value] = ev
+            rows.append(row)
 
-        return results
+        X = pd.DataFrame(rows)[FULL_FEATURE_NAMES]
+        predictions = self.model.predict(X)
+
+        return {
+            action.value: float(prediction)
+            for action, prediction in zip(legal_actions, predictions)
+        }
 
     def recommend_action(
         self, features: dict[str, float], legal_actions: list[ActionType]

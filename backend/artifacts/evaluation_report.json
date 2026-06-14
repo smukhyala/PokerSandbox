@@ -1,0 +1,774 @@
+{
+  "generated_at_unix": 1781473541,
+  "dataset": {
+    "rows": 206834,
+    "columns": [
+      "hand_rank_normalized",
+      "hand_rank_class",
+      "hole_card_rank_high",
+      "hole_card_rank_low",
+      "hole_cards_suited",
+      "hole_cards_connected",
+      "hole_cards_pair",
+      "preflop_hand_group",
+      "board_num_cards",
+      "board_pair_present",
+      "board_trips_present",
+      "board_flush_possible",
+      "board_flush_draw",
+      "board_straight_possible",
+      "board_high_card_rank",
+      "board_wetness",
+      "board_overcards_to_hero",
+      "made_hand_on_board",
+      "street",
+      "is_in_position",
+      "position_is_btn",
+      "num_actions_this_street",
+      "pot_size_bb",
+      "hero_stack_bb",
+      "villain_stack_bb",
+      "spr",
+      "pot_odds",
+      "hero_invested_bb",
+      "villain_aggression_this_street",
+      "villain_aggression_overall",
+      "num_bets_this_street",
+      "num_raises_this_street",
+      "villain_bet_size_last",
+      "facing_bet",
+      "bet_to_pot_ratio",
+      "hero_is_aggressor",
+      "preflop_raiser_is_hero",
+      "continuation_bet_opportunity",
+      "check_raise_detected",
+      "action_sequence_length",
+      "action_taken",
+      "hand_profit_bb",
+      "went_to_showdown",
+      "agent_name",
+      "position",
+      "equity_bucket",
+      "is_bet",
+      "is_bluff"
+    ]
+  },
+  "models": {
+    "hand_strength": {
+      "accuracy": 1.0,
+      "confusion_matrix": [
+        [
+          25764,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          5334,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          5889,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3041,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1339
+        ]
+      ],
+      "classification_report": {
+        "0": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 25764.0
+        },
+        "1": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 5334.0
+        },
+        "2": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 5889.0
+        },
+        "3": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 3041.0
+        },
+        "4": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 1339.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 41367.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 41367.0
+        }
+      },
+      "top_features": [
+        {
+          "feature": "hand_rank_normalized",
+          "importance": 0.438121
+        },
+        {
+          "feature": "hand_rank_class",
+          "importance": 0.128587
+        },
+        {
+          "feature": "preflop_hand_group",
+          "importance": 0.105166
+        },
+        {
+          "feature": "made_hand_on_board",
+          "importance": 0.060961
+        },
+        {
+          "feature": "board_pair_present",
+          "importance": 0.046613
+        },
+        {
+          "feature": "hole_card_rank_low",
+          "importance": 0.044777
+        },
+        {
+          "feature": "hole_card_rank_high",
+          "importance": 0.02579
+        },
+        {
+          "feature": "board_high_card_rank",
+          "importance": 0.023676
+        },
+        {
+          "feature": "hole_cards_pair",
+          "importance": 0.023461
+        },
+        {
+          "feature": "street",
+          "importance": 0.018382
+        },
+        {
+          "feature": "board_wetness",
+          "importance": 0.017862
+        },
+        {
+          "feature": "board_num_cards",
+          "importance": 0.016529
+        },
+        {
+          "feature": "board_overcards_to_hero",
+          "importance": 0.008396
+        },
+        {
+          "feature": "action_sequence_length",
+          "importance": 0.007651
+        },
+        {
+          "feature": "hole_cards_suited",
+          "importance": 0.007204
+        }
+      ]
+    },
+    "opponent_action": {
+      "accuracy": 0.6413808107912103,
+      "confusion_matrix": [
+        [
+          42,
+          68,
+          115,
+          39,
+          320,
+          330,
+          927
+        ],
+        [
+          16,
+          1262,
+          221,
+          20,
+          332,
+          957,
+          935
+        ],
+        [
+          28,
+          140,
+          1907,
+          23,
+          491,
+          1127,
+          1618
+        ],
+        [
+          21,
+          85,
+          101,
+          64,
+          268,
+          634,
+          912
+        ],
+        [
+          32,
+          127,
+          106,
+          25,
+          5366,
+          0,
+          3334
+        ],
+        [
+          15,
+          36,
+          174,
+          7,
+          0,
+          10131,
+          0
+        ],
+        [
+          37,
+          67,
+          91,
+          25,
+          1031,
+          0,
+          7760
+        ]
+      ],
+      "classification_report": {
+        "all_in": {
+          "precision": 0.2198952879581152,
+          "recall": 0.022813688212927757,
+          "f1-score": 0.04133858267716536,
+          "support": 1841.0
+        },
+        "bet_large": {
+          "precision": 0.7070028011204482,
+          "recall": 0.33716270371359874,
+          "f1-score": 0.4565846599131693,
+          "support": 3743.0
+        },
+        "bet_medium": {
+          "precision": 0.7023941068139963,
+          "recall": 0.35751781027371576,
+          "f1-score": 0.4738476829419804,
+          "support": 5334.0
+        },
+        "bet_small": {
+          "precision": 0.31527093596059114,
+          "recall": 0.030695443645083934,
+          "f1-score": 0.055944055944055944,
+          "support": 2085.0
+        },
+        "call": {
+          "precision": 0.6872438524590164,
+          "recall": 0.5968854282536151,
+          "f1-score": 0.6388855816168592,
+          "support": 8990.0
+        },
+        "check": {
+          "precision": 0.7687229683587525,
+          "recall": 0.9776126604265174,
+          "f1-score": 0.86067453912157,
+          "support": 10363.0
+        },
+        "fold": {
+          "precision": 0.5010977657238797,
+          "recall": 0.8611696815003884,
+          "f1-score": 0.6335469649344818,
+          "support": 9011.0
+        },
+        "accuracy": 0.6413808107912103,
+        "macro avg": {
+          "precision": 0.5573753883421142,
+          "recall": 0.4548367737179781,
+          "f1-score": 0.4515460095927546,
+          "support": 41367.0
+        },
+        "weighted avg": {
+          "precision": 0.6313012570066625,
+          "recall": 0.6413808107912103,
+          "f1-score": 0.59953322549125,
+          "support": 41367.0
+        }
+      },
+      "top_features": [
+        {
+          "feature": "pot_odds",
+          "importance": 0.133736
+        },
+        {
+          "feature": "facing_bet",
+          "importance": 0.129139
+        },
+        {
+          "feature": "hand_rank_normalized",
+          "importance": 0.100833
+        },
+        {
+          "feature": "bet_to_pot_ratio",
+          "importance": 0.070674
+        },
+        {
+          "feature": "num_bets_this_street",
+          "importance": 0.04077
+        },
+        {
+          "feature": "hand_rank_class",
+          "importance": 0.038687
+        },
+        {
+          "feature": "preflop_hand_group",
+          "importance": 0.03496
+        },
+        {
+          "feature": "villain_bet_size_last",
+          "importance": 0.033317
+        },
+        {
+          "feature": "spr",
+          "importance": 0.02867
+        },
+        {
+          "feature": "hero_stack_bb",
+          "importance": 0.028445
+        },
+        {
+          "feature": "hero_is_aggressor",
+          "importance": 0.028221
+        },
+        {
+          "feature": "villain_stack_bb",
+          "importance": 0.026864
+        },
+        {
+          "feature": "pot_size_bb",
+          "importance": 0.026144
+        },
+        {
+          "feature": "villain_aggression_this_street",
+          "importance": 0.025394
+        },
+        {
+          "feature": "hero_invested_bb",
+          "importance": 0.024094
+        }
+      ]
+    },
+    "bluff_detector": {
+      "accuracy": 1.0,
+      "confusion_matrix": [
+        [
+          4729,
+          0
+        ],
+        [
+          0,
+          8274
+        ]
+      ],
+      "classification_report": {
+        "0": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 4729.0
+        },
+        "1": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 8274.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 13003.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 13003.0
+        }
+      },
+      "top_features": [
+        {
+          "feature": "hand_rank_normalized",
+          "importance": 0.504733
+        },
+        {
+          "feature": "preflop_hand_group",
+          "importance": 0.128588
+        },
+        {
+          "feature": "hole_card_rank_low",
+          "importance": 0.067724
+        },
+        {
+          "feature": "hand_rank_class",
+          "importance": 0.055671
+        },
+        {
+          "feature": "board_pair_present",
+          "importance": 0.041888
+        },
+        {
+          "feature": "made_hand_on_board",
+          "importance": 0.038272
+        },
+        {
+          "feature": "hole_cards_pair",
+          "importance": 0.030409
+        },
+        {
+          "feature": "board_wetness",
+          "importance": 0.024393
+        },
+        {
+          "feature": "street",
+          "importance": 0.020406
+        },
+        {
+          "feature": "board_num_cards",
+          "importance": 0.018937
+        },
+        {
+          "feature": "board_high_card_rank",
+          "importance": 0.01441
+        },
+        {
+          "feature": "bet_to_pot_ratio",
+          "importance": 0.009597
+        },
+        {
+          "feature": "hole_card_rank_high",
+          "importance": 0.007882
+        },
+        {
+          "feature": "action_sequence_length",
+          "importance": 0.006828
+        },
+        {
+          "feature": "board_overcards_to_hero",
+          "importance": 0.005325
+        }
+      ],
+      "bet_rows": 13003
+    },
+    "ev_model": {
+      "mse": 1275.850523518644,
+      "mae": 18.224385726393653,
+      "rmse": 35.71904986864354,
+      "top_features": [
+        {
+          "feature": "action_all_in",
+          "importance": 0.287356
+        },
+        {
+          "feature": "hole_card_rank_high",
+          "importance": 0.095891
+        },
+        {
+          "feature": "hole_card_rank_low",
+          "importance": 0.073371
+        },
+        {
+          "feature": "hand_rank_normalized",
+          "importance": 0.070047
+        },
+        {
+          "feature": "board_overcards_to_hero",
+          "importance": 0.062929
+        },
+        {
+          "feature": "pot_size_bb",
+          "importance": 0.049708
+        },
+        {
+          "feature": "action_sequence_length",
+          "importance": 0.045291
+        },
+        {
+          "feature": "preflop_hand_group",
+          "importance": 0.036987
+        },
+        {
+          "feature": "spr",
+          "importance": 0.033641
+        },
+        {
+          "feature": "villain_stack_bb",
+          "importance": 0.029664
+        },
+        {
+          "feature": "hero_invested_bb",
+          "importance": 0.025186
+        },
+        {
+          "feature": "made_hand_on_board",
+          "importance": 0.021728
+        },
+        {
+          "feature": "board_high_card_rank",
+          "importance": 0.017525
+        },
+        {
+          "feature": "hero_stack_bb",
+          "importance": 0.017193
+        },
+        {
+          "feature": "villain_aggression_overall",
+          "importance": 0.016078
+        }
+      ]
+    }
+  },
+  "agent_backtests": {
+    "tag_vs_random": {
+      "num_hands": 2000,
+      "seed": 42,
+      "agent_1_stats": {
+        "total_hands": 2000,
+        "total_profit_bb": 2316.0,
+        "bb_per_100": 115.8,
+        "win_rate": 0.126,
+        "showdown_rate": 0.0345,
+        "showdown_win_rate": 0.8115942028985508,
+        "aggression_factor": 0.2879045996592845,
+        "fold_frequency": 0.6965074267362505,
+        "bet_frequency": 0.06784423926134082,
+        "call_frequency": 0.10678442392613409,
+        "hands_won": 252,
+        "agent_name": "TAG"
+      },
+      "agent_2_stats": {
+        "total_hands": 2000,
+        "total_profit_bb": -2316.0,
+        "bb_per_100": -115.8,
+        "win_rate": 0.874,
+        "showdown_rate": 0.0345,
+        "showdown_win_rate": 0.18840579710144928,
+        "aggression_factor": 4.381526104417671,
+        "fold_frequency": 0.12760416666666666,
+        "bet_frequency": 0.7102864583333334,
+        "call_frequency": 0.115234375,
+        "hands_won": 1748,
+        "agent_name": "Random"
+      },
+      "summary": {
+        "winner": "TAG",
+        "agent_1_bb_per_100": 115.8,
+        "agent_2_bb_per_100": -115.8,
+        "delta_bb_per_100": 231.6,
+        "agent_1_total_profit_bb": 2316.0,
+        "agent_2_total_profit_bb": -2316.0,
+        "agent_1_outperformed": true
+      }
+    },
+    "lag_vs_random": {
+      "num_hands": 2000,
+      "seed": 42,
+      "agent_1_stats": {
+        "total_hands": 2000,
+        "total_profit_bb": 2086.5,
+        "bb_per_100": 104.325,
+        "win_rate": 0.2375,
+        "showdown_rate": 0.1305,
+        "showdown_win_rate": 0.5632183908045977,
+        "aggression_factor": 1.3801418439716313,
+        "fold_frequency": 0.4567821301392036,
+        "bet_frequency": 0.3149886694723211,
+        "call_frequency": 0.14341210747814828,
+        "hands_won": 475,
+        "agent_name": "LAG"
+      },
+      "agent_2_stats": {
+        "total_hands": 2000,
+        "total_profit_bb": -2086.5,
+        "bb_per_100": -104.325,
+        "win_rate": 0.758,
+        "showdown_rate": 0.1305,
+        "showdown_win_rate": 0.40229885057471265,
+        "aggression_factor": 3.948529411764706,
+        "fold_frequency": 0.13975287601193012,
+        "bet_frequency": 0.6864081806561568,
+        "call_frequency": 0.14103110353642948,
+        "hands_won": 1516,
+        "agent_name": "Random"
+      },
+      "summary": {
+        "winner": "LAG",
+        "agent_1_bb_per_100": 104.325,
+        "agent_2_bb_per_100": -104.325,
+        "delta_bb_per_100": 208.65,
+        "agent_1_total_profit_bb": 2086.5,
+        "agent_2_total_profit_bb": -2086.5,
+        "agent_1_outperformed": true
+      }
+    },
+    "tag_vs_calling_station": {
+      "num_hands": 2000,
+      "seed": 42,
+      "agent_1_stats": {
+        "total_hands": 2000,
+        "total_profit_bb": 1246.5,
+        "bb_per_100": 62.324999999999996,
+        "win_rate": 0.2835,
+        "showdown_rate": 0.458,
+        "showdown_win_rate": 0.509825327510917,
+        "aggression_factor": 0.32161290322580643,
+        "fold_frequency": 0.1936626648297579,
+        "bet_frequency": 0.19622121629600472,
+        "call_frequency": 0.02971855933871285,
+        "hands_won": 567,
+        "agent_name": "TAG"
+      },
+      "agent_2_stats": {
+        "total_hands": 2000,
+        "total_profit_bb": -1246.5,
+        "bb_per_100": -62.324999999999996,
+        "win_rate": 0.6995,
+        "showdown_rate": 0.458,
+        "showdown_win_rate": 0.45305676855895194,
+        "aggression_factor": 0.04328358208955224,
+        "fold_frequency": 0.02328830926874709,
+        "bet_frequency": 0.04052165812761994,
+        "call_frequency": 0.44177922682813225,
+        "hands_won": 1399,
+        "agent_name": "CallingStation"
+      },
+      "summary": {
+        "winner": "TAG",
+        "agent_1_bb_per_100": 62.325,
+        "agent_2_bb_per_100": -62.325,
+        "delta_bb_per_100": 124.65,
+        "agent_1_total_profit_bb": 1246.5,
+        "agent_2_total_profit_bb": -1246.5,
+        "agent_1_outperformed": true
+      }
+    },
+    "mlagent_vs_tag": {
+      "num_hands": 2000,
+      "seed": 42,
+      "agent_1_stats": {
+        "total_hands": 2000,
+        "total_profit_bb": -1955.0,
+        "bb_per_100": -97.75,
+        "win_rate": 0.924,
+        "showdown_rate": 0.0535,
+        "showdown_win_rate": 0.2616822429906542,
+        "aggression_factor": 1.9982046678635548,
+        "fold_frequency": 0.04188181296615032,
+        "bet_frequency": 0.6385542168674698,
+        "call_frequency": 0.2306368330464716,
+        "hands_won": 1848,
+        "agent_name": "MLAgent"
+      },
+      "agent_2_stats": {
+        "total_hands": 2000,
+        "total_profit_bb": 1955.0,
+        "bb_per_100": 97.75,
+        "win_rate": 0.075,
+        "showdown_rate": 0.0535,
+        "showdown_win_rate": 0.719626168224299,
+        "aggression_factor": 0.21908893709327548,
+        "fold_frequency": 0.6182065217391305,
+        "bet_frequency": 0.06861413043478261,
+        "call_frequency": 0.07948369565217392,
+        "hands_won": 150,
+        "agent_name": "TAG"
+      },
+      "summary": {
+        "winner": "TAG",
+        "agent_1_bb_per_100": -97.75,
+        "agent_2_bb_per_100": 97.75,
+        "delta_bb_per_100": -195.5,
+        "agent_1_total_profit_bb": -1955.0,
+        "agent_2_total_profit_bb": 1955.0,
+        "agent_1_outperformed": false
+      }
+    },
+    "mlagent_vs_lag": {
+      "num_hands": 2000,
+      "seed": 42,
+      "agent_1_stats": {
+        "total_hands": 2000,
+        "total_profit_bb": -1929.0,
+        "bb_per_100": -96.45,
+        "win_rate": 0.76,
+        "showdown_rate": 0.185,
+        "showdown_win_rate": 0.43513513513513513,
+        "aggression_factor": 1.2075645756457565,
+        "fold_frequency": 0.10172672672672672,
+        "bet_frequency": 0.4913663663663664,
+        "call_frequency": 0.31493993993993996,
+        "hands_won": 1520,
+        "agent_name": "MLAgent"
+      },
+      "agent_2_stats": {
+        "total_hands": 2000,
+        "total_profit_bb": 1929.0,
+        "bb_per_100": 96.45,
+        "win_rate": 0.2355,
+        "showdown_rate": 0.185,
+        "showdown_win_rate": 0.5405405405405406,
+        "aggression_factor": 1.053159478435306,
+        "fold_frequency": 0.3990017615971814,
+        "bet_frequency": 0.3082795067527892,
+        "call_frequency": 0.13857897827363477,
+        "hands_won": 471,
+        "agent_name": "LAG"
+      },
+      "summary": {
+        "winner": "LAG",
+        "agent_1_bb_per_100": -96.45,
+        "agent_2_bb_per_100": 96.45,
+        "delta_bb_per_100": -192.9,
+        "agent_1_total_profit_bb": -1929.0,
+        "agent_2_total_profit_bb": 1929.0,
+        "agent_1_outperformed": false
+      }
+    }
+  },
+  "notes": [
+    "EV labels use final hand profit from simulated agents, not counterfactual solver EV.",
+    "Backtests are seeded and intended for regression comparisons, not proof of game-theoretic optimality."
+  ],
+  "elapsed_seconds": 135.99
+}

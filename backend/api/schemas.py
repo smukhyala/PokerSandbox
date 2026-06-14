@@ -11,7 +11,7 @@ class AnalyzeHandRequest(BaseModel):
     pot_size_bb: float = Field(3.0, ge=0)
     hero_stack_bb: float = Field(97.0, ge=0)
     villain_stack_bb: float = Field(97.0, ge=0)
-    hero_position: str = Field("BTN", pattern="^(BTN|BB)$")
+    hero_position: str = Field("BTN", pattern="^(BTN|BB|SB|CO|MP|UTG)$")
     action_history: list[dict] = Field(default=[])
 
 
@@ -62,7 +62,7 @@ class GradeScenarioResponse(BaseModel):
 class SimulateRequest(BaseModel):
     agent_1: str = Field("TAG", examples=["TAG", "LAG", "CallingStation", "Random", "MLAgent"])
     agent_2: str = Field("Random")
-    num_hands: int = Field(1000, ge=10, le=50000)
+    num_hands: int = Field(1000, ge=10, le=1000)
     strategy_config_1: dict | None = None
     strategy_config_2: dict | None = None
 
@@ -86,6 +86,64 @@ class SimulateResponse(BaseModel):
     agent_2_stats: dict
     bankroll_history: list[dict]
     hand_summaries: list[HandSummary]
+
+
+class StrategyExperimentRequest(BaseModel):
+    description: str = Field(
+        ..., min_length=5, max_length=1000,
+        examples=["Play tight preflop, c-bet dry boards often, avoid river bluffs"],
+    )
+    baseline_agent: str = Field("TAG", examples=["TAG", "LAG", "CallingStation", "Random", "MLAgent"])
+    num_hands: int = Field(1000, ge=10, le=1000)
+    seed: int = Field(42, ge=0)
+
+
+class StrategyExperimentResponse(BaseModel):
+    parsed_strategy: dict
+    matched_keywords: list[str]
+    confidence: float
+    warnings: list[str]
+    baseline_agent: str
+    num_hands: int
+    seed: int
+    agent_1_stats: dict
+    agent_2_stats: dict
+    bankroll_history: list[dict]
+    summary: dict
+    product_insights: list[str]
+
+
+class StrategyDiagnoseRequest(BaseModel):
+    description: str = Field(
+        "", max_length=1000,
+        examples=["Play loose aggressive, bluff rivers often, never fold to pressure"],
+    )
+    strategy_config: dict | None = None
+    baselines: list[str] = Field(
+        default=["TAG", "LAG", "CallingStation", "Random"],
+        max_length=5,
+        examples=[["TAG", "LAG", "CallingStation", "Random"]],
+    )
+    num_hands: int = Field(500, ge=10, le=1000)
+    seed: int = Field(42, ge=0)
+    optimize: bool = Field(True)
+    max_candidates: int = Field(6, ge=1, le=12)
+
+
+class StrategyDiagnoseResponse(BaseModel):
+    parsed_strategy: dict
+    matched_keywords: list[str]
+    confidence: float
+    warnings: list[str]
+    num_hands_per_matchup: int
+    baselines: list[str]
+    matchup_results: list[dict]
+    leaks: list[dict]
+    aggregate_score: int
+    worst_matchup: dict
+    optimization: dict | None
+    detailed_feedback: list[str]
+    summary: str
 
 
 class ParseStrategyRequest(BaseModel):

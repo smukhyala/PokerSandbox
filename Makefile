@@ -1,4 +1,4 @@
-.PHONY: setup setup-backend setup-frontend generate-data train dev dev-backend dev-frontend test clean
+.PHONY: setup setup-backend setup-frontend generate-data generate-ev-data train evaluate dev dev-backend dev-frontend test clean
 
 # Full setup
 setup: setup-backend setup-frontend generate-data train
@@ -15,8 +15,14 @@ setup-frontend:
 generate-data:
 	.venv/bin/python3 backend/scripts/generate_data.py
 
+generate-ev-data:
+	.venv/bin/python3 backend/scripts/generate_ev_data.py
+
 train:
 	.venv/bin/python3 backend/scripts/train_models.py
+
+evaluate:
+	.venv/bin/python3 backend/scripts/evaluate_models.py
 
 # Development servers
 dev: dev-backend dev-frontend

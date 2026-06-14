@@ -143,3 +143,76 @@ export interface ParseResult {
   confidence: number
   warnings: string[]
 }
+
+export interface StrategyExperimentResult {
+  parsed_strategy: StrategyConfig
+  matched_keywords: string[]
+  confidence: number
+  warnings: string[]
+  baseline_agent: string
+  num_hands: number
+  seed: number
+  agent_1_stats: AgentStats
+  agent_2_stats: AgentStats
+  bankroll_history: BankrollDataPoint[]
+  summary: Record<string, number | string | boolean>
+  product_insights: string[]
+}
+
+export interface StrategyLeak {
+  leak_type: string
+  severity: 'low' | 'medium' | 'high'
+  evidence: string[]
+  recommendation: string
+  suggested_parameter_changes: Record<string, number>
+  impact_bb_per_100: number | null
+}
+
+export interface StrategyMatchupResult {
+  baseline_agent: string
+  seed: number
+  agent_1_stats: AgentStats
+  agent_2_stats: AgentStats
+  summary: Record<string, number | string | boolean>
+}
+
+export interface StrategyDiagnoseResult {
+  parsed_strategy: StrategyConfig
+  matched_keywords: string[]
+  confidence: number
+  warnings: string[]
+  num_hands_per_matchup: number
+  baselines: string[]
+  matchup_results: StrategyMatchupResult[]
+  leaks: StrategyLeak[]
+  aggregate_score: number
+  worst_matchup: Record<string, number | string>
+  optimization: {
+    attempted: boolean
+    reason: string
+    best_config: StrategyConfig
+    best_score: number | null
+    original_score: number | null
+    improvement: number | null
+    changes: Array<{
+      parameter: string
+      before: number
+      after: number
+      reason: string
+    }>
+    candidate_results: Array<{
+      name: string
+      score: number
+      avg_delta_bb_per_100: number
+      reason: string
+      changes: Array<{
+        parameter: string
+        before: number
+        after: number
+        reason: string
+      }>
+    }>
+  } | null
+  detailed_feedback: string[]
+  summary: string
+}
