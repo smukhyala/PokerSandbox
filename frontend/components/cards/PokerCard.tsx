@@ -28,10 +28,10 @@ export default function PokerCard({ card, size = 'md', faceDown, onClick, select
     return (
       <div className={clsx(
         SIZES[size],
-        'rounded-lg border-2 border-gray-600 bg-gradient-to-br from-blue-900 to-blue-800 flex items-center justify-center cursor-default',
-        onClick && 'cursor-pointer hover:border-amber-400',
+        'rounded-lg border-2 border-[#cfcfcf] bg-[#f7f7f7] flex items-center justify-center cursor-default',
+        onClick && 'cursor-pointer hover:border-[#111111]',
       )} onClick={onClick}>
-        <span className="text-blue-400 text-xl">?</span>
+        <span className="text-[#8a8a8a] text-xl">?</span>
       </div>
     )
   }
@@ -46,8 +46,8 @@ export default function PokerCard({ card, size = 'md', faceDown, onClick, select
       className={clsx(
         SIZES[size],
         'rounded-lg border-2 bg-white flex flex-col items-center justify-center font-bold cursor-default select-none',
-        selected ? 'border-amber-400 ring-2 ring-amber-400/50' : 'border-gray-300',
-        onClick && 'cursor-pointer hover:border-amber-400 hover:scale-105 transition-transform',
+        selected ? 'border-[#111111] ring-2 ring-[#111111]/20' : 'border-[#cfcfcf]',
+        onClick && 'cursor-pointer hover:border-[#111111] hover:scale-105 transition-transform',
       )}
       onClick={onClick}
     >

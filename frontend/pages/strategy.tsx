@@ -500,7 +500,7 @@ function summarizeStrategy(config: StrategyConfig, sourceText: string) {
   const pressure = config.aggression >= 0.65 ? 'aggressive' : config.aggression <= 0.35 ? 'passive' : 'balanced pressure'
   const river = config.river.bluff_frequency >= 0.20 ? 'river bluffing' : 'low river bluffing'
   const source = sourceText.trim()
-  return source ? `${range}, ${pressure}, ${river}: ${source.slice(0, 90)}` : `${range}, ${pressure}, ${river}`
+  return source ? `Strategy: ${source.slice(0, 90)}` : `Strategy: ${range}, ${pressure}, ${river}`
 }
 
 function clampHands(value: number) {

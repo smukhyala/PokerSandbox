@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 body {
-  color: #fafafa;
-  background: #000;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #111111;
+  background: #ffffff;
+  font-family: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
 }
 
 /* Custom scrollbar */
@@ -13,10 +13,10 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: #ffffff;
 }
 ::-webkit-scrollbar-thumb {
-  background: #3f3f46;
+  background: #cfcfcf;
   border-radius: 3px;
 }
 
@@ -24,7 +24,7 @@ body {
 input[type="range"] {
   height: 6px;
   border-radius: 3px;
-  background: #27272a;
+  background: #ececec;
   outline: none;
 }
 
@@ -36,7 +36,71 @@ input[type="range"] {
 input,
 select,
 textarea {
-  color-scheme: dark;
+  color-scheme: light;
+}
+
+/* Embedded portfolio theme: map the app's dark utility skin to Sanjay's white mono site. */
+.bg-black,
+.bg-\[\#111111\],
+.bg-zinc-950,
+.bg-zinc-900,
+.bg-gray-900,
+.bg-gray-800,
+.bg-gray-800\/50 {
+  background-color: #ffffff !important;
+}
+
+.bg-\[\#111111\],
+.border-black {
+  background-color: #f7f7f7 !important;
+  border-color: #cfcfcf !important;
+}
+
+.text-white {
+  color: #111111 !important;
+}
+
+.bg-zinc-950,
+.bg-zinc-900,
+.bg-gray-900,
+.bg-gray-800,
+.bg-gray-800\/50 {
+  background-color: #fbfbfb !important;
+}
+
+.text-white,
+.text-zinc-300,
+.text-zinc-400,
+.text-gray-300,
+.text-gray-400 {
+  color: #111111 !important;
+}
+
+.text-zinc-500,
+.text-zinc-600,
+.text-gray-500 {
+  color: #8a8a8a !important;
+}
+
+.border-white\/10,
+.border-white\/15,
+.border-white\/20,
+.border-gray-700,
+.border-gray-800 {
+  border-color: #ececec !important;
+}
+
+.placeholder-zinc-600::placeholder,
+.placeholder-gray-500::placeholder {
+  color: #8a8a8a !important;
+}
+
+.focus\:border-white:focus {
+  border-color: #111111 !important;
+}
+
+.focus\:ring-white\/30:focus {
+  --tw-ring-color: rgba(17, 17, 17, 0.22) !important;
 }
 
 /* Monochrome compatibility for older page classes while shadcn primitives are adopted. */
@@ -52,31 +116,38 @@ textarea {
 .text-purple-300,
 .text-purple-400,
 .text-blue-300 {
-  color: #fafafa !important;
+  color: #111111 !important;
 }
 
 .bg-amber-500,
 .bg-amber-600,
 .bg-green-600,
 .bg-blue-600,
-.bg-purple-600 {
-  background-color: #fafafa !important;
-  color: #000 !important;
+.bg-purple-600,
+.bg-gray-600,
+.bg-gray-700,
+.bg-gray-950 {
+  background-color: #f7f7f7 !important;
+  color: #111111 !important;
+  border-color: #cfcfcf !important;
 }
 
 .hover\:bg-amber-600:hover,
 .hover\:bg-green-700:hover,
 .hover\:bg-blue-700:hover,
-.hover\:bg-purple-700:hover {
-  background-color: #d4d4d8 !important;
-  color: #000 !important;
+.hover\:bg-purple-700:hover,
+.hover\:bg-gray-600:hover,
+.hover\:bg-gray-700:hover {
+  background-color: #ffffff !important;
+  color: #111111 !important;
+  border-color: #111111 !important;
 }
 
 .border-amber-800\/50,
 .border-green-800\/50,
 .border-red-800\/50,
 .border-cyan-800\/40 {
-  border-color: rgba(255, 255, 255, 0.16) !important;
+  border-color: #ececec !important;
 }
 
 .bg-gray-900,
@@ -89,5 +160,28 @@ textarea {
 .bg-amber-500\/20,
 .bg-red-500\/20,
 .bg-blue-500\/20 {
-  background-color: #09090b !important;
+  background-color: #fbfbfb !important;
+  color: #111111 !important;
+  border-color: #ececec !important;
+}
+
+.disabled\:bg-gray-700:disabled {
+  background-color: #f7f7f7 !important;
+  color: #8a8a8a !important;
+}
+
+[class*="bg-gray-9"],
+[class*="bg-gray-8"],
+[class*="bg-zinc-9"],
+[class*="bg-slate-9"] {
+  background-color: #fbfbfb !important;
+  color: #111111 !important;
+}
+
+[class*="border-gray-8"],
+[class*="border-gray-7"],
+[class*="border-zinc-9"],
+[class*="border-zinc-8"],
+[class*="border-white/"] {
+  border-color: #ececec !important;
 }

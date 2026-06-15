@@ -61,7 +61,7 @@ export default function AnalyzePage() {
     <div className="max-w-5xl">
       <div className="mb-6">
         <h2 className="text-2xl font-bold">Analyze</h2>
-        <p className="text-gray-400 text-sm mt-1">
+        <p className="text-[#4a4a4a] text-sm mt-1">
           Break down any poker hand. {BB_EXPLANATION}
         </p>
       </div>
@@ -69,11 +69,11 @@ export default function AnalyzePage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left: Inputs */}
         <div className="space-y-4">
-          <div className="bg-gray-900 rounded-xl border border-gray-800 p-6 space-y-4">
+          <div className="bg-[#fbfbfb] rounded-xl border border-[#ececec] p-6 space-y-4">
             <div>
               <div className="flex items-center justify-between mb-2">
-                <p className="text-xs text-gray-500">Hole Cards</p>
-                <button onClick={() => setSelectingFor('hole')} className="text-xs text-amber-400 hover:text-amber-300">
+                <p className="text-xs text-[#8a8a8a]">Hole Cards</p>
+                <button onClick={() => setSelectingFor('hole')} className="text-xs text-[#111111] hover:text-[#111111]">
                   {holeCards.length < 2 ? 'Select' : 'Change'}
                 </button>
               </div>
@@ -82,8 +82,8 @@ export default function AnalyzePage() {
 
             <div>
               <div className="flex items-center justify-between mb-2">
-                <p className="text-xs text-gray-500">Board (0-5 cards)</p>
-                <button onClick={() => setSelectingFor('board')} className="text-xs text-amber-400 hover:text-amber-300">
+                <p className="text-xs text-[#8a8a8a]">Board (0-5 cards)</p>
+                <button onClick={() => setSelectingFor('board')} className="text-xs text-[#111111] hover:text-[#111111]">
                   Add Card
                 </button>
               </div>
@@ -100,38 +100,38 @@ export default function AnalyzePage() {
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-xs text-gray-500 block mb-1">Pot in big blinds</label>
+                <label className="text-xs text-[#8a8a8a] block mb-1">Pot in big blinds</label>
                 <input type="number" value={potSize} onChange={e => setPotSize(Number(e.target.value))}
-                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm" />
+                  className="w-full bg-white border border-[#ececec] rounded-lg px-3 py-2 text-sm" />
               </div>
               <div>
-                <label className="text-xs text-gray-500 block mb-1">Position</label>
+                <label className="text-xs text-[#8a8a8a] block mb-1">Position</label>
                 <select value={heroPosition} onChange={e => setHeroPosition(e.target.value)}
-                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm">
+                  className="w-full bg-white border border-[#ececec] rounded-lg px-3 py-2 text-sm">
                   {Object.entries(POSITION_DESCRIPTIONS).map(([value, label]) => (
                     <option key={value} value={value}>{label}</option>
                   ))}
                 </select>
               </div>
               <div>
-                <label className="text-xs text-gray-500 block mb-1">Hero stack in big blinds</label>
+                <label className="text-xs text-[#8a8a8a] block mb-1">Hero stack in big blinds</label>
                 <input type="number" value={heroStack} onChange={e => setHeroStack(Number(e.target.value))}
-                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm" />
+                  className="w-full bg-white border border-[#ececec] rounded-lg px-3 py-2 text-sm" />
               </div>
               <div>
-                <label className="text-xs text-gray-500 block mb-1">Villain stack in big blinds</label>
+                <label className="text-xs text-[#8a8a8a] block mb-1">Villain stack in big blinds</label>
                 <input type="number" value={villainStack} onChange={e => setVillainStack(Number(e.target.value))}
-                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm" />
+                  className="w-full bg-white border border-[#ececec] rounded-lg px-3 py-2 text-sm" />
               </div>
             </div>
 
             <div className="flex gap-3">
               <button onClick={runAnalysis} disabled={holeCards.length !== 2 || loading}
-                className="flex-1 bg-amber-500 hover:bg-amber-600 disabled:bg-gray-700 disabled:text-gray-500 text-gray-900 font-semibold px-4 py-2.5 rounded-lg transition-colors">
+                className="flex-1 bg-[#f7f7f7] border border-[#cfcfcf] hover:bg-white disabled:bg-[#f7f7f7] disabled:text-[#8a8a8a] text-[#111111] font-semibold px-4 py-2.5 rounded-lg transition-colors">
                 {loading ? 'Analyzing...' : 'Analyze Hand'}
               </button>
               <button onClick={reset}
-                className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2.5 rounded-lg transition-colors">
+                className="bg-[#f7f7f7] hover:bg-white text-[#111111] px-4 py-2.5 rounded-lg transition-colors">
                 Reset
               </button>
             </div>
@@ -141,31 +141,31 @@ export default function AnalyzePage() {
         {/* Right: Results */}
         <div>
           {result ? (
-            <div className="bg-gray-900 rounded-xl border border-gray-800 p-6 space-y-4">
-              <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wide">Analysis Results</h3>
+            <div className="bg-[#fbfbfb] rounded-xl border border-[#ececec] p-6 space-y-4">
+              <h3 className="text-sm font-medium text-[#4a4a4a] uppercase tracking-wide">Analysis Results</h3>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-gray-800 rounded-lg p-4 text-center">
-                  <p className="text-xs text-gray-500">Equity</p>
-                  <p className="text-3xl font-bold text-amber-400">{(result.equity * 100).toFixed(0)}%</p>
+                <div className="bg-white rounded-lg p-4 text-center">
+                  <p className="text-xs text-[#8a8a8a]">Equity</p>
+                  <p className="text-3xl font-bold text-[#111111]">{(result.equity * 100).toFixed(0)}%</p>
                 </div>
-                <div className="bg-gray-800 rounded-lg p-4 text-center">
-                  <p className="text-xs text-gray-500">Hand Strength</p>
-                  <p className="text-2xl font-bold text-white capitalize">{result.hand_strength}</p>
+                <div className="bg-white rounded-lg p-4 text-center">
+                  <p className="text-xs text-[#8a8a8a]">Hand Strength</p>
+                  <p className="text-2xl font-bold text-[#111111] capitalize">{result.hand_strength}</p>
                 </div>
               </div>
 
-              <div className="bg-gray-800 rounded-lg p-4">
-                <p className="text-xs text-gray-500 mb-1">Recommended Action</p>
-                <p className="text-lg font-bold text-green-400">{ACTION_LABELS[result.recommended_action] || result.recommended_action}</p>
+              <div className="bg-white rounded-lg p-4">
+                <p className="text-xs text-[#8a8a8a] mb-1">Recommended Action</p>
+                <p className="text-lg font-bold text-[#111111]">{ACTION_LABELS[result.recommended_action] || result.recommended_action}</p>
               </div>
-              <div className="bg-gray-800 rounded-lg p-4">
-                <p className="text-xs text-gray-500 mb-1">Position</p>
-                <p className="text-sm text-gray-300">{POSITION_LABELS[heroPosition]} ({POSITION_DESCRIPTIONS[heroPosition]})</p>
+              <div className="bg-white rounded-lg p-4">
+                <p className="text-xs text-[#8a8a8a] mb-1">Position</p>
+                <p className="text-sm text-[#4a4a4a]">{POSITION_LABELS[heroPosition]} ({POSITION_DESCRIPTIONS[heroPosition]})</p>
               </div>
 
               <div>
-                <h4 className="text-xs text-gray-500 mb-2">Action EVs</h4>
+                <h4 className="text-xs text-[#8a8a8a] mb-2">Action EVs</h4>
                 <div className="space-y-2">
                   {Object.entries(result.action_evs).sort(([,a], [,b]) => b - a).map(([action, ev]) => {
                     const maxEv = Math.max(...Object.values(result.action_evs))
@@ -175,13 +175,13 @@ export default function AnalyzePage() {
                     return (
                       <div key={action}>
                         <div className="flex justify-between text-sm mb-0.5">
-                          <span className={action === result.recommended_action ? 'text-green-400' : 'text-gray-400'}>
+                          <span className={action === result.recommended_action ? 'text-[#111111]' : 'text-[#4a4a4a]'}>
                             {ACTION_LABELS[action] || action}
                           </span>
                           <span className="font-mono">{ev.toFixed(1)} big blinds</span>
                         </div>
-                        <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                          <div className={clsx('h-full rounded-full', action === result.recommended_action ? 'bg-green-500' : 'bg-gray-500')}
+                        <div className="h-2 bg-[#f7f7f7] rounded-full overflow-hidden">
+                          <div className={clsx('h-full rounded-full', action === result.recommended_action ? 'bg-[#111111]' : 'bg-[#cfcfcf]')}
                             style={{ width: `${Math.max(5, pct)}%` }} />
                         </div>
                       </div>
@@ -191,20 +191,20 @@ export default function AnalyzePage() {
               </div>
 
               {result.bluff_probability != null && (
-                <div className="bg-gray-800 rounded-lg p-4">
-                  <p className="text-xs text-gray-500">Bluff Probability</p>
+                <div className="bg-white rounded-lg p-4">
+                  <p className="text-xs text-[#8a8a8a]">Bluff Probability</p>
                   <p className="text-xl font-bold">{(result.bluff_probability * 100).toFixed(0)}%</p>
                 </div>
               )}
 
-              <div className="bg-gray-800 rounded-lg p-4">
-                <p className="text-xs text-gray-500 mb-1">Reasoning</p>
-                <p className="text-sm text-gray-300">{result.explanation}</p>
+              <div className="bg-white rounded-lg p-4">
+                <p className="text-xs text-[#8a8a8a] mb-1">Reasoning</p>
+                <p className="text-sm text-[#4a4a4a]">{result.explanation}</p>
               </div>
             </div>
           ) : (
-            <div className="bg-gray-900 rounded-xl border border-gray-800 p-6 flex items-center justify-center h-64">
-              <p className="text-gray-500">Select cards and analyze to see results</p>
+            <div className="bg-[#fbfbfb] rounded-xl border border-[#ececec] p-6 flex items-center justify-center h-64">
+              <p className="text-[#8a8a8a]">Select cards and analyze to see results</p>
             </div>
           )}
         </div>

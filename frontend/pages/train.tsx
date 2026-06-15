@@ -44,20 +44,20 @@ export default function TrainPage() {
     <div className="max-w-5xl">
       <div className="mb-6">
         <h2 className="text-2xl font-bold">Train</h2>
-        <p className="text-gray-400 text-sm mt-1">
+        <p className="text-[#4a4a4a] text-sm mt-1">
           Practice reading poker situations. You&apos;ll see a hand, estimate its strength, choose an action, and get ML-powered feedback. {BB_EXPLANATION}
         </p>
       </div>
 
       {!scenario ? (
-        <div className="bg-gray-900 rounded-xl border border-gray-800 p-8 text-center max-w-md mx-auto">
-          <p className="text-gray-400 mb-4">
+        <div className="bg-[#fbfbfb] rounded-xl border border-[#ececec] p-8 text-center max-w-md mx-auto">
+          <p className="text-[#4a4a4a] mb-4">
             Each scenario gives you a poker hand and asks you to evaluate it.
             The ML models will then grade your decision and explain the optimal play.
           </p>
           <button
             onClick={fetchScenario}
-            className="bg-amber-500 hover:bg-amber-600 text-gray-900 font-semibold px-8 py-3 rounded-lg transition-colors text-lg"
+            className="bg-[#f7f7f7] border border-[#cfcfcf] hover:bg-white text-[#111111] font-semibold px-8 py-3 rounded-lg transition-colors text-lg"
             disabled={loading}
           >
             {loading ? 'Loading...' : 'Start Training'}
@@ -68,18 +68,18 @@ export default function TrainPage() {
           {/* Left column */}
           <div className="space-y-5">
             {/* Scenario card */}
-            <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
-              <h3 className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-4">Scenario</h3>
+            <div className="bg-[#fbfbfb] rounded-xl border border-[#ececec] p-6">
+              <h3 className="text-xs font-medium text-[#4a4a4a] uppercase tracking-wide mb-4">Scenario</h3>
 
               {/* Cards row */}
               <div className="flex gap-8 mb-5">
                 <div>
-                  <p className="text-xs text-gray-500 mb-1.5">Your Hand</p>
+                  <p className="text-xs text-[#8a8a8a] mb-1.5">Your Hand</p>
                   <CardGroup cards={scenario.hole_cards} size="lg" />
                 </div>
                 {scenario.board.length > 0 && (
                   <div>
-                    <p className="text-xs text-gray-500 mb-1.5">Board</p>
+                    <p className="text-xs text-[#8a8a8a] mb-1.5">Board</p>
                     <CardGroup cards={scenario.board} size="lg" />
                   </div>
                 )}
@@ -96,10 +96,10 @@ export default function TrainPage() {
               {/* Action history */}
               {scenario.action_history.length > 0 && (
                 <div className="mb-4">
-                  <p className="text-xs text-gray-500 mb-1.5">What happened so far</p>
+                  <p className="text-xs text-[#8a8a8a] mb-1.5">What happened so far</p>
                   <div className="flex flex-wrap gap-1.5">
                     {scenario.action_history.map((a, i) => (
-                      <span key={i} className="bg-gray-800 text-gray-300 text-xs px-2 py-1 rounded">
+                      <span key={i} className="bg-white text-[#4a4a4a] text-xs px-2 py-1 rounded">
                         {POSITION_LABELS[a.player] ?? a.player} {a.action}{a.amount ? ` ${a.amount} big blinds` : ''}
                       </span>
                     ))}
@@ -108,27 +108,27 @@ export default function TrainPage() {
               )}
 
               {/* Prompt */}
-              <div className="bg-gray-800/50 rounded-lg p-3">
-                <p className="text-gray-300 text-sm">{scenario.prompt}</p>
+              <div className="bg-[#fbfbfb] rounded-lg p-3">
+                <p className="text-[#4a4a4a] text-sm">{scenario.prompt}</p>
               </div>
             </div>
 
             {/* Your estimates */}
-            <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
-              <h3 className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-4">Your Estimates</h3>
+            <div className="bg-[#fbfbfb] rounded-xl border border-[#ececec] p-6">
+              <h3 className="text-xs font-medium text-[#4a4a4a] uppercase tracking-wide mb-4">Your Estimates</h3>
 
               {/* Hand strength slider */}
               <div className="mb-5">
                 <div className="flex justify-between items-baseline mb-1.5">
-                  <label className="text-sm text-gray-400">How strong is your hand?</label>
-                  <span className="text-sm font-mono text-white">{strengthEstimate}%</span>
+                  <label className="text-sm text-[#4a4a4a]">How strong is your hand?</label>
+                  <span className="text-sm font-mono text-[#111111]">{strengthEstimate}%</span>
                 </div>
                 <input
                   type="range" min="0" max="100" value={strengthEstimate}
                   onChange={e => setStrengthEstimate(Number(e.target.value))}
-                  className="w-full accent-amber-500"
+                  className="w-full accent-[#8a8a8a]"
                 />
-                <div className="flex justify-between text-xs text-gray-600 mt-0.5">
+                <div className="flex justify-between text-xs text-[#8a8a8a] mt-0.5">
                   <span>Trash</span><span>Weak</span><span>Medium</span><span>Strong</span><span>Monster</span>
                 </div>
               </div>
@@ -136,22 +136,22 @@ export default function TrainPage() {
               {/* Bluff slider */}
               <div className="mb-5">
                 <div className="flex justify-between items-baseline mb-1.5">
-                  <label className="text-sm text-gray-400">Is the opponent bluffing?</label>
-                  <span className="text-sm font-mono text-white">{bluffGuess}%</span>
+                  <label className="text-sm text-[#4a4a4a]">Is the opponent bluffing?</label>
+                  <span className="text-sm font-mono text-[#111111]">{bluffGuess}%</span>
                 </div>
                 <input
                   type="range" min="0" max="100" value={bluffGuess}
                   onChange={e => setBluffGuess(Number(e.target.value))}
-                  className="w-full accent-amber-500"
+                  className="w-full accent-[#8a8a8a]"
                 />
-                <div className="flex justify-between text-xs text-gray-600 mt-0.5">
+                <div className="flex justify-between text-xs text-[#8a8a8a] mt-0.5">
                   <span>Definitely value</span><span>Unsure</span><span>Definitely bluff</span>
                 </div>
               </div>
 
               {/* Action selection */}
               <div className="mb-5">
-                <p className="text-sm text-gray-400 mb-2">What would you do?</p>
+                <p className="text-sm text-[#4a4a4a] mb-2">What would you do?</p>
                 <div className="grid grid-cols-3 gap-2">
                   {scenario.legal_actions.map(action => (
                     <button
@@ -160,8 +160,8 @@ export default function TrainPage() {
                       className={clsx(
                         'px-3 py-2.5 rounded-lg text-sm font-medium transition-all text-center',
                         chosenAction === action
-                          ? 'ring-2 ring-white bg-amber-600 text-white'
-                          : 'bg-gray-800 text-gray-300 hover:bg-gray-700',
+                          ? 'ring-2 ring-[#cfcfcf] bg-white text-[#111111]'
+                          : 'bg-white text-[#4a4a4a] hover:bg-[#f7f7f7]',
                       )}
                     >
                       {ACTION_LABELS[action] || action}
@@ -173,7 +173,7 @@ export default function TrainPage() {
               <button
                 onClick={submitAnswer}
                 disabled={!chosenAction || loading}
-                className="w-full bg-amber-500 hover:bg-amber-600 disabled:bg-gray-700 disabled:text-gray-500 text-gray-900 font-semibold px-6 py-3 rounded-lg transition-colors"
+                className="w-full bg-[#f7f7f7] border border-[#cfcfcf] hover:bg-white disabled:bg-[#f7f7f7] disabled:text-[#8a8a8a] text-[#111111] font-semibold px-6 py-3 rounded-lg transition-colors"
               >
                 {loading ? 'Grading...' : 'Submit Answer'}
               </button>
@@ -183,23 +183,23 @@ export default function TrainPage() {
           {/* Right column: Feedback */}
           <div>
             {feedback ? (
-              <div className="bg-gray-900 rounded-xl border border-gray-800 p-6 space-y-5 sticky top-8">
+              <div className="bg-[#fbfbfb] rounded-xl border border-[#ececec] p-6 space-y-5 sticky top-8">
                 {/* Header with grade */}
                 <div className="flex items-center justify-between">
-                  <h3 className="text-xs font-medium text-gray-400 uppercase tracking-wide">Model Feedback</h3>
+                  <h3 className="text-xs font-medium text-[#4a4a4a] uppercase tracking-wide">Model Feedback</h3>
                   <div className="flex items-center gap-3">
                     <span className={clsx(
                       'text-4xl font-black',
-                      feedback.grade === 'A' ? 'text-green-400' :
+                      feedback.grade === 'A' ? 'text-[#111111]' :
                       feedback.grade === 'B' ? 'text-lime-400' :
                       feedback.grade === 'C' ? 'text-yellow-400' :
-                      feedback.grade === 'D' ? 'text-orange-400' : 'text-red-400'
+                      feedback.grade === 'D' ? 'text-orange-400' : 'text-[#111111]'
                     )}>
                       {feedback.grade}
                     </span>
                     <div className="text-right">
-                      <p className="text-lg font-bold text-white">{feedback.score}/100</p>
-                      <p className="text-xs text-gray-500">score</p>
+                      <p className="text-lg font-bold text-[#111111]">{feedback.score}/100</p>
+                      <p className="text-xs text-[#8a8a8a]">score</p>
                     </div>
                   </div>
                 </div>
@@ -242,7 +242,7 @@ export default function TrainPage() {
 
                 {/* Action EV breakdown */}
                 <div>
-                  <p className="text-xs text-gray-500 mb-2">All Action EVs (sorted best to worst)</p>
+                  <p className="text-xs text-[#8a8a8a] mb-2">All Action EVs (sorted best to worst)</p>
                   <div className="space-y-1.5">
                     {Object.entries(feedback.action_evs).sort(([,a], [,b]) => b - a).map(([action, ev]) => {
                       const isOptimal = action === feedback.recommended_action
@@ -251,23 +251,20 @@ export default function TrainPage() {
                       return (
                         <div key={action} className={clsx(
                           'flex items-center justify-between text-sm px-3 py-1.5 rounded',
-                          isChosen && gotItRight ? 'bg-green-900/30 border border-green-800/50' :
-                          isChosen && !gotItRight ? 'bg-red-900/30 border border-red-800/50' :
-                          isOptimal ? 'bg-cyan-900/20 border border-cyan-800/40' :
-                          'bg-gray-800/50',
+                          isChosen || isOptimal ? 'bg-white border border-[#cfcfcf]' : 'bg-[#fbfbfb] border border-[#ececec]',
                         )}>
                           <span className={clsx(
-                            isChosen && gotItRight ? 'text-green-400' :
-                            isChosen && !gotItRight ? 'text-red-400' :
-                            isOptimal ? 'text-cyan-400' :
-                            'text-gray-400'
+                            isChosen && gotItRight ? 'text-[#111111]' :
+                            isChosen && !gotItRight ? 'text-[#111111]' :
+                            isOptimal ? 'text-[#111111]' :
+                            'text-[#4a4a4a]'
                           )}>
                             {ACTION_LABELS[action] || action}
                             {isOptimal && !isChosen && ' (best)'}
                             {isChosen && isOptimal && ' (you — correct!)'}
                             {isChosen && !isOptimal && ' (your pick)'}
                           </span>
-                          <span className="font-mono text-gray-300">{ev >= 0 ? '+' : ''}{ev.toFixed(1)} big blinds</span>
+                          <span className="font-mono text-[#4a4a4a]">{ev >= 0 ? '+' : ''}{ev.toFixed(1)} big blinds</span>
                         </div>
                       )
                     })}
@@ -275,22 +272,22 @@ export default function TrainPage() {
                 </div>
 
                 {/* Explanation */}
-                <div className="bg-gray-800 rounded-lg p-4">
-                  <p className="text-xs text-gray-500 mb-1">Why?</p>
-                  <p className="text-sm text-gray-300 leading-relaxed">{feedback.explanation}</p>
+                <div className="bg-white rounded-lg p-4">
+                  <p className="text-xs text-[#8a8a8a] mb-1">Why?</p>
+                  <p className="text-sm text-[#4a4a4a] leading-relaxed">{feedback.explanation}</p>
                 </div>
 
                 <button
                   onClick={fetchScenario}
-                  className="w-full bg-gray-700 hover:bg-gray-600 text-white font-medium px-4 py-3 rounded-lg transition-colors"
+                  className="w-full bg-[#f7f7f7] border border-[#cfcfcf] hover:bg-white text-[#111111] font-medium px-4 py-3 rounded-lg transition-colors"
                 >
                   Next Scenario &rarr;
                 </button>
               </div>
             ) : (
-              <div className="bg-gray-900 rounded-xl border border-gray-800 p-8 text-center sticky top-8">
-                <div className="text-gray-600 text-4xl mb-3">?</div>
-                <p className="text-gray-500 text-sm">
+              <div className="bg-[#fbfbfb] rounded-xl border border-[#ececec] p-8 text-center sticky top-8">
+                <div className="text-[#8a8a8a] text-4xl mb-3">?</div>
+                <p className="text-[#8a8a8a] text-sm">
                   Make your estimates and choose an action, then submit to see how the ML models would play this spot.
                 </p>
               </div>
@@ -304,9 +301,9 @@ export default function TrainPage() {
 
 function InfoBox({ label, value }: { label: string; value: string }) {
   return (
-    <div className="bg-gray-800 rounded-lg px-3 py-2 text-center">
-      <p className="text-xs text-gray-500">{label}</p>
-      <p className="text-sm font-bold text-white capitalize">{value}</p>
+    <div className="bg-white rounded-lg px-3 py-2 text-center">
+      <p className="text-xs text-[#8a8a8a]">{label}</p>
+      <p className="text-sm font-bold text-[#111111] capitalize">{value}</p>
     </div>
   )
 }
@@ -315,10 +312,10 @@ function MetricBox({ label, value, note, good, bad }: {
   label: string; value: string; note?: string; good?: boolean; bad?: boolean
 }) {
   return (
-    <div className="bg-gray-800 rounded-lg p-3">
-      <p className="text-xs text-gray-500">{label}</p>
-      <p className={clsx('text-lg font-bold', good ? 'text-green-400' : bad ? 'text-red-400' : 'text-white')}>{value}</p>
-      {note && <p className="text-xs text-gray-500 mt-0.5">{note}</p>}
+    <div className="bg-white rounded-lg p-3">
+      <p className="text-xs text-[#8a8a8a]">{label}</p>
+      <p className={clsx('text-lg font-bold', good ? 'text-[#111111]' : bad ? 'text-[#111111]' : 'text-[#111111]')}>{value}</p>
+      {note && <p className="text-xs text-[#8a8a8a] mt-0.5">{note}</p>}
     </div>
   )
 }
