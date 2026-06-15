@@ -17,14 +17,14 @@ import {
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
-const simpleSteps = [
+const systemSteps = [
   {
     title: 'Create poker personalities',
     icon: Bot,
     body: 'PokerLab starts with built-in agents like Tight-Aggressive, Loose-Aggressive, Calling Station, and Random.',
   },
   {
-    title: 'Let them play hands',
+    title: 'Run simulated hands',
     icon: Workflow,
     body: 'The simulator deals cards, moves the hand forward, and lets each agent make choices.',
   },
@@ -34,9 +34,9 @@ const simpleSteps = [
     body: 'Before an agent acts, PokerLab saves what the table looked like and what the agent chose.',
   },
   {
-    title: 'Turn poker into numbers',
+    title: 'Build feature vectors',
     icon: Network,
-    body: 'Cards, position, stack size, pot size, board texture, and betting pressure become model features.',
+    body: 'Cards, position, stack size, pot size, board texture, and betting pressure become structured training features.',
   },
   {
     title: 'Score what happened later',
@@ -55,7 +55,7 @@ const simpleSteps = [
     body: 'The trained model can estimate expected value for actions like fold, call, check, bet, or all-in.',
   },
   {
-    title: 'Ask "what if?" for each action',
+    title: 'Score each legal action',
     icon: ListChecks,
     body: 'For a new poker spot, PokerLab creates a row for every legal action and asks the model to score each one.',
   },
@@ -72,7 +72,7 @@ const simpleSteps = [
 ]
 
 const modelOutputs = [
-  ['Hand Strength Model', 'Learns simple buckets like weak, medium, and strong from engineered poker features.'],
+  ['Hand Strength Model', 'Classifies hand-strength buckets from engineered poker state features.'],
   ['Opponent Action Model', 'Learns what actions different simulated styles usually take in similar spots.'],
   ['Bluff Detector', 'Flags likely bluff patterns when low-strength hands take aggressive actions.'],
   ['EV Regressor', 'Predicts the expected profit of each possible action in the current state.'],
@@ -80,7 +80,7 @@ const modelOutputs = [
 
 const customSteps = [
   ['Write strategy', 'Example: "Play aggressive preflop, bluff rivers often, and fold less to small bets."'],
-  ['Compile config', 'The app turns that sentence into numbers like aggression, tightness, bluff frequency, and call threshold.'],
+  ['Compile config', 'The app maps that sentence into strategy parameters like aggression, tightness, bluff frequency, and call threshold.'],
   ['Create agent', 'That config becomes a custom poker agent that can play inside the simulator.'],
   ['Stress test', 'The custom agent plays against built-in baselines so PokerLab can measure strengths and leaks.'],
   ['Patch and rerun', 'The app suggests parameter changes and reruns the diagnostic to see if the strategy improved.'],
@@ -91,11 +91,11 @@ export default function GuidePage() {
     <div className="max-w-7xl">
       <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
         <Badge variant="outline" className="mb-3">How it works</Badge>
-        <h2 className="text-3xl font-semibold tracking-tight">PokerLab, Explained Simply</h2>
+        <h2 className="text-3xl font-semibold tracking-tight">PokerLab System Overview</h2>
         <p className="text-zinc-400 text-sm mt-2 max-w-3xl">
-          Think of PokerLab as a practice gym for poker strategies. It creates fake poker games,
-          watches what different player styles do, teaches a Random Forest model from those examples,
-          then uses that model to judge new decisions and custom strategies.
+          PokerLab is a simulation-driven ML system for poker strategy. It generates synthetic hands,
+          converts decision states into feature vectors, trains Random Forest models on supervised labels
+          and EV targets, then uses the trained model to evaluate new decisions and custom strategies.
         </p>
       </motion.div>
 
@@ -130,7 +130,7 @@ export default function GuidePage() {
           </CardHeader>
           <CardContent>
             <div className="rounded-lg bg-white text-black p-4">
-              <p className="text-sm font-medium">Same poker spot, many possible moves:</p>
+              <p className="text-sm font-medium">Same decision state, multiple legal actions:</p>
               <div className="mt-3 space-y-2 text-xs">
                 <ScoreRow action="Fold" score="-1.20 expected value" />
                 <ScoreRow action="Call" score="+0.15 expected value" />
@@ -194,12 +194,12 @@ function TenStepGuide() {
       <CardHeader>
         <CardTitle>Step-by-Step Story</CardTitle>
         <CardDescription>
-          The whole system in 10 steps, from fake poker games to model-backed decisions.
+          The whole system in 10 steps, from simulated hands to model-backed decisions.
         </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-3">
-          {simpleSteps.map((step, index) => (
+          {systemSteps.map((step, index) => (
             <StepCard key={step.title} step={step} index={index} />
           ))}
         </div>
@@ -211,10 +211,10 @@ function TenStepGuide() {
 function LearningLoopVisual() {
   const phases = [
     { title: 'Agents', subtitle: 'Different player styles', icon: GitBranch },
-    { title: 'Simulator', subtitle: 'They play hands', icon: Workflow },
-    { title: 'Dataset', subtitle: 'Decisions get saved', icon: Database },
-    { title: 'Features', subtitle: 'Poker becomes numbers', icon: Network },
-    { title: 'Random Forest', subtitle: 'Trees learn patterns', icon: BrainCircuit, highlight: true },
+    { title: 'Simulator', subtitle: 'Runs synthetic hands', icon: Workflow },
+    { title: 'Dataset', subtitle: 'Stores labels and outcomes', icon: Database },
+    { title: 'Features', subtitle: 'Creates training vectors', icon: Network },
+    { title: 'Random Forest', subtitle: 'Learns decision patterns', icon: BrainCircuit, highlight: true },
     { title: 'EV Model', subtitle: 'Scores each action', icon: Gauge },
     { title: 'MLAgent', subtitle: 'Chooses best score', icon: Sparkles },
   ]
